@@ -6,9 +6,10 @@ var express     = require("express"),
     Comment     = require("./models/comment"),
     seedDB      = require("./seeds")
     
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://localhost/yelp_camp_v4");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 app.get("/", function(req, res){
@@ -103,6 +104,6 @@ app.post("/campgrounds/:id/comments", function(req, res){
    //redirect campground show page
 });
 
-app.listen(process.env.PORT||3000, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
 });
